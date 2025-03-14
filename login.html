@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=375px, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body { width: 375px; margin: 0 auto; }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1',
+                        secondary: '#F43F5E'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white">
+    <div id="loginPage" class="min-h-screen p-6 flex flex-col">
+        <div class="mb-12 text-center">
+            <h1 class="font-['Pacifico'] text-4xl text-primary mb-3">logo</h1>
+            <p class="text-gray-600">Welcome back! Please login to continue</p>
+        </div>
+
+        <form id="loginForm" class="flex-1 flex flex-col gap-4">
+            <div class="relative">
+                <input type="email" id="email" placeholder="Email" class="w-full h-12 px-4 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+                <i class="ri-mail-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+
+            <div class="relative">
+                <input type="password" id="password" placeholder="Password" class="w-full h-12 px-4 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+                <i class="ri-eye-off-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer" id="togglePassword"></i>
+            </div>
+
+            <div class="text-right">
+                <a href="#" class="text-sm text-primary">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="h-12 bg-primary text-white font-medium !rounded-button">Login</button>
+            <div class="flex items-center gap-4 my-6">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-sm text-gray-500">Or continue with</span>
+                <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+                <button type="button" class="h-12 border border-gray-200 rounded-button flex items-center justify-center">
+                    <i class="ri-google-fill text-[#EA4335]"></i>
+                </button>
+                <button type="button" class="h-12 border border-gray-200 rounded-button flex items-center justify-center">
+                    <i class="ri-apple-fill"></i>
+                </button>
+                <button type="button" class="h-12 border border-gray-200 rounded-button flex items-center justify-center">
+                    <i class="ri-facebook-fill text-[#1877F2]"></i>
+                </button>
+            </div>
+        </form>
+        <p class="text-center mt-6">
+            Don't have an account? 
+            <a href="#" class="text-primary" onclick="switchPage('signup')">Sign up</a>
+        </p>
+    </div>
+
+    <div id="signupPage" class="min-h-screen p-6 flex flex-col hidden">
+        <div class="mb-12 text-center">
+            <h1 class="font-['Pacifico'] text-4xl text-primary mb-3">logo</h1>
+            <p class="text-gray-600">Create a new account</p>
+        </div>
+
+        <form id="signupForm" class="flex-1 flex flex-col gap-4">
+            <div class="relative">
+                <input type="text" id="fullName" placeholder="Full Name" class="w-full h-12 px-4 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+                <i class="ri-user-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+
+            <div class="relative">
+                <input type="email" id="signupEmail" placeholder="Email" class="w-full h-12 px-4 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+                <i class="ri-mail-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+
+            <div class="relative">
+                <input type="password" id="signupPassword" placeholder="Password" class="w-full h-12 px-4 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+                <i class="ri-eye-off-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer" id="toggleSignupPassword"></i>
+            </div>
+
+            <div class="relative">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" class="w-full h-12 px-4 border border-gray-200 rounded focus:outline-none focus:border-primary" required>
+                <i class="ri-eye-off-line absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer" id="toggleConfirmPassword"></i>
+            </div>
+
+            <div id="passwordStrength" class="hidden">
+                <div class="h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="strengthBar" class="h-full w-0 transition-all duration-300"></div>
+                </div>
+                <p id="strengthText" class="text-xs mt-1 text-gray-500"></p>
+            </div>
+
+            <label class="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" class="mt-1" required>
+                <span class="text-sm text-gray-600">I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a></span>
+            </label>
+
+            <button type="submit" class="h-12 bg-primary text-white font-medium !rounded-button">Sign Up</button>
+            <div class="flex items-center gap-4 my-6">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-sm text-gray-500">Or sign up with</span>
+                <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+                <button type="button" class="h-12 border border-gray-200 rounded-button flex items-center justify-center">
+                    <i class="ri-google-fill text-[#EA4335]"></i>
+                </button>
+                <button type="button" class="h-12 border border-gray-200 rounded-button flex items-center justify-center">
+                    <i class="ri-apple-fill"></i>
+                </button>
+                <button type="button" class="h-12 border border-gray-200 rounded-button flex items-center justify-center">
+                    <i class="ri-facebook-fill text-[#1877F2]"></i>
+                </button>
+            </div>
+        </form>
+        <p class="text-center mt-6">
+            Already have an account? 
+            <a href="#" class="text-primary" onclick="switchPage('login')">Login</a>
+        </p>
+    </div>
+
+    <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 bg-white shadow-lg rounded-lg p-4 flex items-center gap-2 transition-all duration-300 opacity-0 -translate-y-full">
+        <i class="ri-error-warning-line text-secondary"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        const mockData = {
+            users: [
+                { email: 'john.doe@example.com', password: 'Password123!' }
+            ]
+        };
+
+        function switchPage(page) {
+            const loginPage = document.getElementById('loginPage');
+            const signupPage = document.getElementById('signupPage');
+            
+            if (page === 'login') {
+                loginPage.classList.remove('hidden');
+                signupPage.classList.add('hidden');
+            } else {
+                loginPage.classList.add('hidden');
+                signupPage.classList.remove('hidden');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('opacity-0', '-translate-y-full');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-full');
+            }, 3000);
+        }
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const user = mockData.users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                showToast('Login successful!');
+            } else {
+                showToast('Invalid email or password');
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showToast('Passwords do not match');
+                return;
+            }
+
+            if (mockData.users.some(u => u.email === email)) {
+                showToast('Email already exists');
+                return;
+            }
+
+            mockData.users.push({ email, password });
+            showToast('Account created successfully!');
+            switchPage('login');
+        });
+
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('ri-eye-off-line', 'ri-eye-line');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('ri-eye-line', 'ri-eye-off-line');
+            }
+        }
+
+        document.getElementById('togglePassword').addEventListener('click', () => togglePasswordVisibility('password', 'togglePassword'));
+        document.getElementById('toggleSignupPassword').addEventListener('click', () => togglePasswordVisibility('signupPassword', 'toggleSignupPassword'));
+        document.getElementById('toggleConfirmPassword').addEventListener('click', () => togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword'));
+        document.getElementById('signupPassword').addEventListener('input', (e) => {
+            const password = e.target.value;
+            const strengthDiv = document.getElementById('passwordStrength');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+
+            if (password) {
+                strengthDiv.classList.remove('hidden');
+                
+                let strength = 0;
+                let feedback = [];
+
+                if (password.length >= 8) {
+                    strength += 25;
+                    feedback.push('Length');
+                }
+                if (/[A-Z]/.test(password)) {
+                    strength += 25;
+                    feedback.push('Uppercase');
+                }
+                if (/[0-9]/.test(password)) {
+                    strength += 25;
+                    feedback.push('Number');
+                }
+                if (/[^A-Za-z0-9]/.test(password)) {
+                    strength += 25;
+                    feedback.push('Special');
+                }
+
+                strengthBar.style.width = strength + '%';
+                strengthBar.className = `h-full transition-all duration-300 ${
+                    strength <= 25 ? 'bg-red-500' :
+                    strength <= 50 ? 'bg-orange-500' :
+                    strength <= 75 ? 'bg-yellow-500' :
+                    'bg-green-500'
+                }`;
+
+                strengthText.textContent = `Password strength: ${feedback.join(' • ')}`;
+            } else {
+                strengthDiv.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

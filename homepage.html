@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :where([class^="ri-"])::before { content: "\f3c2"; }
+    .modal { display: none; }
+    .modal.show { display: flex; }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4F46E5',
+            secondary: '#6B7280'
+          },
+          borderRadius: {
+            'none': '0px',
+            'sm': '4px',
+            DEFAULT: '8px',
+            'md': '12px',
+            'lg': '16px',
+            'xl': '20px',
+            '2xl': '24px',
+            '3xl': '32px',
+            'full': '9999px',
+            'button': '8px'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50">
+  <!-- Top Navigation Bar -->
+  <div class="fixed top-0 left-0 right-0 z-50 bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+        </div>
+        <div class="flex-1 max-w-xl mx-8">
+          <div class="relative">
+            <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-full text-sm focus:outline-none">
+            <div class="absolute left-3 top-0 h-full w-5 flex items-center justify-center">
+              <i class="ri-search-line text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button class="relative w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full cursor-pointer" onclick="toggleNotifications()">
+            <i class="ri-notification-3-line text-xl"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <button class="relative w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full cursor-pointer" onclick="toggleMessages()">
+            <i class="ri-message-3-line text-xl"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <button class="w-10 h-10 flex items-center justify-center cursor-pointer" onclick="toggleUserMenu()">
+            <img src="https://public.readdy.ai/ai/img_res/2e2a3f301c68a12d5d2c7f1bd533cf9a.jpg" class="w-8 h-8 rounded-full object-cover">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="pt-16 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row">
+      <!-- Left Sidebar (hidden on mobile) -->
+      <div class="hidden md:block w-64 fixed md:relative left-0 top-16 bottom-0 p-4 overflow-y-auto">
+        <div class="bg-white rounded-lg p-4 mb-4">
+          <div class="flex items-center space-x-3 mb-4">
+            <img src="https://public.readdy.ai/ai/img_res/0f9fd842927203e312386d68863d881a.jpg" class="w-10 h-10 rounded-full object-cover">
+            <div>
+              <h3 class="font-medium">Emma Thompson</h3>
+              <p class="text-sm text-gray-500">@emmathompson</p>
+            </div>
+          </div>
+          <div class="flex justify-between text-sm text-gray-600">
+            <div>
+              <div class="font-medium">2.5k</div>
+              <div>Following</div>
+            </div>
+            <div>
+              <div class="font-medium">12.8k</div>
+              <div>Followers</div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="bg-white rounded-lg p-2">
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-primary bg-primary/5">
+            <i class="ri-home-5-line text-xl"></i>
+            <span>Home</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-50">
+            <i class="ri-user-line text-xl"></i>
+            <span>Profile</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-50">
+            <i class="ri-group-line text-xl"></i>
+            <span>Friends</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-50">
+            <i class="ri-bookmark-line text-xl"></i>
+            <span>Saved</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-50">
+            <i class="ri-team-line text-xl"></i>
+            <span>Groups</span>
+          </a>
+        </nav>
+
+        <div class="bg-white rounded-lg p-4 mt-4">
+          <h3 class="font-medium mb-3">Trending Topics</h3>
+          <div class="space-y-3">
+            <a href="#" class="block text-sm hover:text-primary">#TechInnovation</a>
+            <a href="#" class="block text-sm hover:text-primary">#DigitalTransformation</a>
+            <a href="#" class="block text-sm hover:text-primary">#FutureOfWork</a>
+            <a href="#" class="block text-sm hover:text-primary">#AI</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Feed -->
+      <div class="flex-1 md:ml-64 md:mr-64">
+        <div class="max-w-2xl mx-auto py-4">
+          <div class="bg-white rounded-lg p-4 mb-4">
+            <div class="flex space-x-3">
+              <img src="https://public.readdy.ai/ai/img_res/461db32440a39d89faaf07ca63379ea5.jpg" class="w-10 h-10 rounded-full object-cover">
+              <div class="flex-1">
+                <textarea class="w-full p-2 border-none text-sm resize-none focus:outline-none" placeholder="What's on your mind, Emma?" rows="2"></textarea>
+                <div class="flex items-center justify-between mt-3 pt-3 border-t">
+                  <div class="flex space-x-2">
+                    <button class="p-2 hover:bg-gray-100 rounded-full cursor-pointer">
+                      <i class="ri-image-line text-xl text-blue-500"></i>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-full cursor-pointer">
+                      <i class="ri-video-line text-xl text-green-500"></i>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-full cursor-pointer">
+                      <i class="ri-emotion-line text-xl text-yellow-500"></i>
+                    </button>
+                  </div>
+                  <button class="px-4 py-1.5 bg-primary text-white rounded-button text-sm font-medium cursor-pointer">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-white rounded-lg p-4">
+              <div class="flex items-center space-x-3 mb-3">
+                <img src="https://public.readdy.ai/ai/img_res/388d166ef486a5417b022b632757d067.jpg" class="w-10 h-10 rounded-full object-cover">
+                <div>
+                  <h4 class="font-medium">David Chen</h4>
+                  <p class="text-sm text-gray-500">2 hours ago</p>
+                </div>
+              </div>
+              <p class="mb-4">Just wrapped up an amazing AI conference! The future of technology is incredibly exciting. Here are some key takeaways from today's sessions on machine learning and neural networks. #TechConference #AI #Innovation</p>
+              <img src="https://public.readdy.ai/ai/img_res/ca5930e7604081e7d84c7e1414fee0bd.jpg" class="w-full rounded-lg mb-4">
+              <div class="flex items-center justify-between pt-3 border-t">
+                <div class="flex space-x-4">
+                  <button class="flex items-center space-x-1 text-sm cursor-pointer" onclick="toggleLike(this)">
+                    <i class="ri-heart-line"></i>
+                    <span>2.1k</span>
+                  </button>
+                  <button class="flex items-center space-x-1 text-sm cursor-pointer">
+                    <i class="ri-chat-1-line"></i>
+                    <span>342</span>
+                  </button>
+                  <button class="flex items-center space-x-1 text-sm cursor-pointer">
+                    <i class="ri-share-line"></i>
+                    <span>Share</span>
+                  </button>
+                </div>
+                <button class="flex items-center space-x-1 text-sm cursor-pointer">
+                  <i class="ri-bookmark-line"></i>
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-4">
+              <div class="flex items-center space-x-3 mb-3">
+                <img src="https://public.readdy.ai/ai/img_res/2537c5be30b7a373c2370a09517e1c7b.jpg" class="w-10 h-10 rounded-full object-cover">
+                <div>
+                  <h4 class="font-medium">Sarah Kim</h4>
+                  <p class="text-sm text-gray-500">4 hours ago</p>
+                </div>
+              </div>
+              <p class="mb-4">Excited to share that our team just launched a new feature that will revolutionize how we handle data processing! 🚀 #TechInnovation #ProductLaunch</p>
+              <div class="flex items-center justify-between pt-3 border-t">
+                <div class="flex space-x-4">
+                  <button class="flex items-center space-x-1 text-sm cursor-pointer" onclick="toggleLike(this)">
+                    <i class="ri-heart-line"></i>
+                    <span>1.8k</span>
+                  </button>
+                  <button class="flex items-center space-x-1 text-sm cursor-pointer">
+                    <i class="ri-chat-1-line"></i>
+                    <span>256</span>
+                  </button>
+                  <button class="flex items-center space-x-1 text-sm cursor-pointer">
+                    <i class="ri-share-line"></i>
+                    <span>Share</span>
+                  </button>
+                </div>
+                <button class="flex items-center space-x-1 text-sm cursor-pointer">
+                  <i class="ri-bookmark-line"></i>
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (hidden on mobile) -->
+      <div class="hidden md:block w-64 fixed md:relative right-0 top-16 bottom-0 p-4 overflow-y-auto">
+        <div class="bg-white rounded-lg p-4 mb-4">
+          <h3 class="font-medium mb-3">Suggested Friends</h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <img src="https://public.readdy.ai/ai/img_res/da7c266a9c0bbb0b0283aae270e1f858.jpg" class="w-10 h-10 rounded-full object-cover">
+                <div>
+                  <h4 class="text-sm font-medium">Michael Brown</h4>
+                  <p class="text-xs text-gray-500">Product Designer</p>
+                </div>
+              </div>
+              <button class="text-primary text-sm font-medium cursor-pointer">Follow</button>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <img src="https://public.readdy.ai/ai/img_res/b0f84e604931d15b1c2c36342d9ff465.jpg" class="w-10 h-10 rounded-full object-cover">
+                <div>
+                  <h4 class="text-sm font-medium">Jessica Wilson</h4>
+                  <p class="text-xs text-gray-500">Software Engineer</p>
+                </div>
+              </div>
+              <button class="text-primary text-sm font-medium cursor-pointer">Follow</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 mb-4">
+          <h3 class="font-medium mb-3">Active Friends</h3>
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3">
+              <div class="relative">
+                <img src="https://public.readdy.ai/ai/img_res/33326d4b463918ebfa05f37600bdd76a.jpg" class="w-10 h-10 rounded-full object-cover">
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+              </div>
+              <div>
+                <h4 class="text-sm font-medium">Alex Johnson</h4>
+                <p class="text-xs text-gray-500">Online</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="relative">
+                <img src="https://public.readdy.ai/ai/img_res/9e474ac1c3b259c54e56d36cca57df95.jpg" class="w-10 h-10 rounded-full object-cover">
+                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+              </div>
+              <div>
+                <h4 class="text-sm font-medium">Emily Davis</h4>
+                <p class="text-xs text-gray-500">Online</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4">
+          <h3 class="font-medium mb-3">Upcoming Events</h3>
+          <div class="space-y-4">
+            <div class="p-3 bg-gray-50 rounded-lg">
+              <p class="text-sm font-medium">Tech Meetup 2025</p>
+              <p class="text-xs text-gray-500 mt-1">March 15, 2025 • 6:00 PM</p>
+              <div class="flex items-center space-x-2 mt-2">
+                <div class="flex -space-x-2">
+                  <img src="https://public.readdy.ai/ai/img_res/1568b4cf8de31737133ec0f5c113460e.jpg" class="w-6 h-6 rounded-full border-2 border-white">
+                  <img src="https://public.readdy.ai/ai/img_res/7c496770a6d31e7c569ea76a420bcbff.jpg" class="w-6 h-6 rounded-full border-2 border-white">
+                  <img src="https://public.readdy.ai/ai/img_res/9bf50838d419def6af0650cfc08b4f2e.jpg" class="w-6 h-6 rounded-full border-2 border-white">
+                </div>
+                <span class="text-xs text-gray-500">+42 going</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications Modal -->
+  <div id="notificationsModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="bg-white w-96 rounded-lg absolute right-4 top-20">
+      <div class="flex items-center justify-between p-4 border-b">
+        <h3 class="font-medium">Notifications</h3>
+        <button onclick="toggleNotifications()" class="text-gray-500 hover:text-gray-700">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <div class="p-4 max-h-96 overflow-y-auto">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <img src="https://public.readdy.ai/ai/img_res/8190c523d9289d718279a80311084160.jpg" class="w-10 h-10 rounded-full">
+            <div class="flex-1">
+              <p class="text-sm"><span class="font-medium">David Chen</span> liked your post</p>
+              <p class="text-xs text-gray-500">2 minutes ago</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <img src="https://public.readdy.ai/ai/img_res/8a515e9411dab1c969d72ca14720c340.jpg" class="w-10 h-10 rounded-full">
+            <div class="flex-1">
+              <p class="text-sm"><span class="font-medium">Sarah Kim</span> commented on your post</p>
+              <p class="text-xs text-gray-500">15 minutes ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Messages Modal -->
+  <div id="messagesModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="bg-white w-96 rounded-lg absolute right-4 top-20">
+      <div class="flex items-center justify-between p-4 border-b">
+        <h3 class="font-medium">Messages</h3>
+        <button onclick="toggleMessages()" class="text-gray-500 hover:text-gray-700">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <div class="p-4 max-h-96 overflow-y-auto">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <img src="https://public.readdy.ai/ai/img_res/820c89935fb8dfe7caad8d2c7261aa6d.jpg" class="w-10 h-10 rounded-full">
+            <div class="flex-1">
+              <h4 class="text-sm font-medium">Alex Johnson</h4>
+              <p class="text-xs text-gray-500">Hey, how's it going?</p>
+            </div>
+            <span class="text-xs text-gray-500">2m</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <img src="https://public.readdy.ai/ai/img_res/5993544b32da54b43b4d4693ec38db52.jpg" class="w-10 h-10 rounded-full">
+            <div class="flex-1">
+              <h4 class="text-sm font-medium">Emily Davis</h4>
+              <p class="text-xs text-gray-500">Thanks for the update!</p>
+            </div>
+            <span class="text-xs text-gray-500">15m</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Menu -->
+  <div id="userMenu" class="modal fixed inset-0 bg-transparent z-50">
+    <div class="bg-white w-48 rounded-lg shadow-lg absolute right-4 top-20">
+      <div class="py-1">
+        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Profile</a>
+        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Settings</a>
+        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Help</a>
+        <hr class="my-1">
+        <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Sign out</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleNotifications() {
+      document.getElementById('notificationsModal').classList.toggle('show');
+      document.getElementById('messagesModal').classList.remove('show');
+      document.getElementById('userMenu').classList.remove('show');
+    }
+
+    function toggleMessages() {
+      document.getElementById('messagesModal').classList.toggle('show');
+      document.getElementById('notificationsModal').classList.remove('show');
+      document.getElementById('userMenu').classList.remove('show');
+    }
+
+    function toggleUserMenu() {
+      document.getElementById('userMenu').classList.toggle('show');
+      document.getElementById('notificationsModal').classList.remove('show');
+      document.getElementById('messagesModal').classList.remove('show');
+    }
+
+    function toggleLike(element) {
+      const icon = element.querySelector('i');
+      const count = element.querySelector('span');
+      if (icon.classList.contains('ri-heart-line')) {
+        icon.classList.replace('ri-heart-line', 'ri-heart-fill');
+        icon.style.color = '#EF4444';
+        count.textContent = (parseInt(count.textContent) + 1) + 'k';
+      } else {
+        icon.classList.replace('ri-heart-fill', 'ri-heart-line');
+        icon.style.color = '';
+        count.textContent = (parseInt(count.textContent) - 1) + 'k';
+      }
+    }
+
+    document.addEventListener('click', function(event) {
+      const notificationsModal = document.getElementById('notificationsModal');
+      const messagesModal = document.getElementById('messagesModal');
+      const userMenu = document.getElementById('userMenu');
+      
+      if (!event.target.closest('#notificationsModal') && 
+          !event.target.closest('[onclick="toggleNotifications()"]')) {
+        notificationsModal.classList.remove('show');
+      }
+      
+      if (!event.target.closest('#messagesModal') && 
+          !event.target.closest('[onclick="toggleMessages()"]')) {
